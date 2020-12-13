@@ -1,24 +1,27 @@
-<div class="container-fluid" style="background-image: url(<%= image_path('home-image.svg') %>); height: 65vh; background-size: cover;">
+<div style="height: 100vh;">
+  <div class="container-fluid" style="background-image: url(<%= image_path('home-image.svg') %>); height: 61vh; background-size: 100vw; background-repeat: no-repeat;">
+  </div>
 
+  <div class="container">
+    <h2 class="text-primary mt-3 text-center">Claire's Garden</h2>
+    <% if user_signed_in? %>
+      <h6 class="text-primary text-center">Vous êtes déjà connecté</h6>
+      <div class="row mt-2">
+        <%= link_to "Accueil", plants_path, class: 'btn btn-primary col-6 offset-3 d-block mt-5' %>
+      </div>
+    <% else %>
+      <div class="row mt-2">
+        <a href="#" class="col-8 offset-2 btn btn-primary d-block mt-3" data-toggle="modal" data-target="#signupModal">S'inscrire avec un email</a>
+      </div>
+      <div class="row">
+         <%= link_to "Se connecter avec Google", new_user_registration_path, class: "col-8 offset-2 btn btn-danger d-block mt-3" %>
+      </div>
+      <p class="text-center mt-3">Vous avez déjà un compte ? <a href="#" data-toggle="modal" data-target="#signinModal">se connecter</a></p>
+   <% end %>
+  </div>
 </div>
 
-<div class="container">
-  <h2 class="text-primary mt-3 text-center">Claire's Garden</h2>
-  <% if user_signed_in? %>
-    <h6 class="text-primary text-center">Vous êtes déjà connecté</h6>
-    <div class="row mt-2">
-      <%= link_to "Accueil", plants_path, class: 'btn btn-primary col-6 offset-3 d-block mt-5' %>
-    </div>
-  <% else %>
-    <div class="row mt-2">
-      <a href="#" class="col-8 offset-2 btn btn-primary d-block mt-3" data-toggle="modal" data-target="#signupModal">S'inscrire avec un email</a>
-    </div>
-    <div class="row">
-       <%= link_to "Se connecter avec Google", new_user_registration_path, class: "col-8 offset-2 btn btn-danger d-block mt-3" %>
-    </div>
-    <p class="text-center mt-3">Vous avez déjà un compte ? <a href="#" data-toggle="modal" data-target="#signinModal">se connecter</a></p>
- <% end %>
-</div>
+
 
 <!-- SignUp Modal  -->
 
