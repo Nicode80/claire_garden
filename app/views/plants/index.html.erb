@@ -1,11 +1,94 @@
-<h1>plants Index</h1>
+<!-- Banner -->
 
-<% if @user.photo.attached? %>
-  <%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill %>
-<% else %>
-  <%= image_tag "avatar_placeholder.svg", alt: "avatar" %>
-<% end %>
+<div class="banner d-flex justify-content-end" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= image_path('banner_placeholder.svg') %>);">
+  <div class="dropdown">
+    <!-- avatar -->
+    <% if @user.photo.attached? %>
+      <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :fill, class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+    <% else %>
+      <%= image_tag "avatar_placeholder.svg", alt: "avatar", class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+    <% end %>
+    <!-- dropdown-menu from avatar -->
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+      <%= link_to "Action", "#", class: "dropdown-item" %>
+      <%= link_to "Another action", "#", class: "dropdown-item" %>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+    </div>
+  </div>
+</div>
 
-<%= current_user.email %>
 
-<%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+<!-- Tabs -->
+
+<nav class="nav claire-garden-tabs d-flex justify-content-around flex-nowrap">
+  <a class="active py-2" href="#tab-my-plants" data-toggle="tab">Mes plantes</a>
+  <a class="py-2" href="#tab-my-calendar" data-toggle="tab">Mon calendrier</a>
+</nav>
+
+<!-- Tabs-content -->
+
+<div class="tab-content mt-2">
+
+  <!-- my-plants-Tab -->
+
+  <div class="tab-pane active" id="tab-my-plants">
+    <div class="container">
+      <div class="row">
+        <!-- dropdown filter -->
+        <div class="col-6 px-2">
+          <%= form_tag plants_path, method: :get, class: "dropdown-filter", id: "filter-form" do %>
+            <%= label_tag "Type de plante" %>
+            <%= select_tag "Type de plante", options_for_select( Plant::CATEGORIES ), {:include_blank => true} %>
+            <%= submit_tag "Apply filters", class: 'btn btn-primary', id: "filter-form-button" %>
+          <% end %>
+        </div>
+        <!-- search bar -->
+        <div class="col-6 px-2">
+          <%= form_tag plants_path, method: :get do %>
+            <%= label_tag "Recherche" %>
+            <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "trouver une plante"
+            %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <% @plants.each do |plant| %>
+          <div class="col-6 px-2">
+            <div class="plant-card"
+              style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+              <% if plant.photo.attached? %>
+                url(<%= cl_image_path plant.photo.key, height: 500, crop: :fill %>);
+              <% else %>
+                url(<%= image_path('flower_placeholder.jpg') %>);
+              <% end %>">
+              <h4><%= plant.name %></h4>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+
+    <p>plants cards</p>
+    <button class="btn btn-primary claire-garden-button button-sticky-bottom">AJOUTER UNE PLANTE</button>
+  </div>
+
+  <!-- my-calendar-Tab -->
+
+  <div class="tab-pane" id="tab-my-calendar">
+    <h3>Type de plante</h3>
+    <p>calendrier</p>
+    <h3>Actions</h3>
+    <p>Actions cards</p>
+  </div>
+
+
+
+
+</div>

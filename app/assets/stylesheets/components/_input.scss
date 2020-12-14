@@ -1,0 +1,57 @@
+// #address-for-autocomplete {
+//   background: $plastroc-text-light;
+//   border: none;
+//   border-radius: 50px;
+//   box-shadow: $plastroc-shadow;
+//   padding: 8px;
+//   color: $plastroc-text;
+//   &:focus{
+//     border: none;
+//     outline: none;
+//   }
+// }
+
+input {
+  background: $claire-card-background;
+  border: none;
+  border-radius: 50px;
+  box-shadow: $claire-shadow;
+  padding: 8px;
+  color: $claire-text;
+}
+textarea:focus, input:focus {
+  border: none;
+  outline: none;
+}
+
+textarea {
+    box-sizing: border-box;
+    width: 100%;
+    background: $claire-card-background;
+    border-radius: 20px;
+    resize: none;
+    border: none;
+    box-shadow: $claire-shadow;
+    padding: 8px 16px;
+}
+.form-control {
+  border-radius: 5px;
+  background: $claire-card-background;
+  box-shadow: $claire-shadow;
+  border: none;
+}
+
+.upload-photo {
+  border: 1px solid #d3d3d3;
+  padding: 16px 24px;
+  cursor: pointer;
+  font-weight: 500;
+  background: white;
+  border-radius: 2px;
+}
+
+// .flatpickr-input[readonly],
+// .form-control:disabled,
+// .form-control[readonly] {
+//   background: #FAFAFA;
+// }
