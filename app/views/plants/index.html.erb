@@ -21,8 +21,8 @@
 <!-- Tabs -->
 
 <nav class="nav claire-garden-tabs d-flex justify-content-around flex-nowrap">
-  <a class="active py-3" href="#tab-my-plants" data-toggle="tab">Mes plantes</a>
-  <a class="py-3" href="#tab-my-calendar" data-toggle="tab">Mon calendrier</a>
+  <a class="active py-2" href="#tab-my-plants" data-toggle="tab">Mes plantes</a>
+  <a class="py-2" href="#tab-my-calendar" data-toggle="tab">Mon calendrier</a>
 </nav>
 
 <!-- Tabs-content -->
@@ -32,6 +32,14 @@
   <!-- my-plants-Tab -->
 
   <div class="tab-pane active" id="tab-my-plants">
+    <div class="container">
+      <%= form_tag plants_path, method: :get, class: "dropdown-filter", id: "filter-form" do %>
+        <%= label_tag "Type de plante" %>
+        <%= select_tag "Type de plante", options_for_select( Plant::CATEGORIES ), {:include_blank => true} %>
+        <%= submit_tag "Apply filters", class: 'btn btn-primary', id: "filter-form-button" %>
+      <% end %>
+
+    </div>
     <h3>Type de plante</h3>
     <p>menu deroulant</p>
     <p>bar de recherche</p>
