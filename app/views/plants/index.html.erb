@@ -2,6 +2,8 @@
 
 <% if @user.photo.attached? %>
   <%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill %>
+<% else %>
+  <%= image_tag "avatar_placeholder.svg", alt: "avatar" %>
 <% end %>
 
 <%= current_user.email %>
