@@ -1,4 +1,13 @@
 .dropdown-filter {
   display: flex;
   flex-direction: column;
+  select {
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    border-radius: 5px;
+    background: $claire-card-background;
+    box-shadow: $claire-shadow;
+    padding: 0.375rem 0.75rem;
+    border: none;
+  }
 }

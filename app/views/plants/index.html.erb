@@ -33,16 +33,28 @@
 
   <div class="tab-pane active" id="tab-my-plants">
     <div class="container">
-      <%= form_tag plants_path, method: :get, class: "dropdown-filter", id: "filter-form" do %>
-        <%= label_tag "Type de plante" %>
-        <%= select_tag "Type de plante", options_for_select( Plant::CATEGORIES ), {:include_blank => true} %>
-        <%= submit_tag "Apply filters", class: 'btn btn-primary', id: "filter-form-button" %>
-      <% end %>
+      <div class="row">
+        <div class="col-6 px-1">
+          <%= form_tag plants_path, method: :get, class: "dropdown-filter", id: "filter-form" do %>
+            <%= label_tag "Type de plante" %>
+            <%= select_tag "Type de plante", options_for_select( Plant::CATEGORIES ), {:include_blank => true} %>
+            <%= submit_tag "Apply filters", class: 'btn btn-primary', id: "filter-form-button" %>
+          <% end %>
+        </div>
+        <div class="col-6 px-1">
+          <%= form_tag plants_path, method: :get do %>
+            <%= label_tag "Recherche" %>
+            <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "trouver une plante"
+            %>
+          <% end %>
+        </div>
+      </div>
+
 
     </div>
-    <h3>Type de plante</h3>
-    <p>menu deroulant</p>
-    <p>bar de recherche</p>
     <p>plants cards</p>
     <button class="btn btn-primary claire-garden-button button-sticky-bottom">AJOUTER UNE PLANTE</button>
   </div>
