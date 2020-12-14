@@ -27,21 +27,23 @@
 
 <!-- Tabs-content -->
 
-<div class="tab-content">
+<div class="tab-content mt-2">
 
   <!-- my-plants-Tab -->
 
   <div class="tab-pane active" id="tab-my-plants">
     <div class="container">
       <div class="row">
-        <div class="col-6 px-1">
+        <!-- dropdown filter -->
+        <div class="col-6 px-2">
           <%= form_tag plants_path, method: :get, class: "dropdown-filter", id: "filter-form" do %>
             <%= label_tag "Type de plante" %>
             <%= select_tag "Type de plante", options_for_select( Plant::CATEGORIES ), {:include_blank => true} %>
             <%= submit_tag "Apply filters", class: 'btn btn-primary', id: "filter-form-button" %>
           <% end %>
         </div>
-        <div class="col-6 px-1">
+        <!-- search bar -->
+        <div class="col-6 px-2">
           <%= form_tag plants_path, method: :get do %>
             <%= label_tag "Recherche" %>
             <%= text_field_tag :query,
@@ -52,9 +54,27 @@
           <% end %>
         </div>
       </div>
+    </div>
 
+    <div class="container">
+      <div class="row">
+        <% @plants.each do |plant| %>
+          <div class="col-6 px-2">
+            <div class="plant-card"
+              style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+              <% if plant.photo.attached? %>
+                url(<%= cl_image_path plant.photo.key, height: 500, crop: :fill %>);
+              <% else %>
+                url(<%= image_path('flower_placeholder.jpg') %>);
+              <% end %>">
+              <h4><%= plant.name %></h4>
+            </div>
+          </div>
+        <% end %>
+      </div>
 
     </div>
+
     <p>plants cards</p>
     <button class="btn btn-primary claire-garden-button button-sticky-bottom">AJOUTER UNE PLANTE</button>
   </div>
