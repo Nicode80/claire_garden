@@ -30,7 +30,11 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 <div class="container" style="margin-bottom: 75px;">
 
   <!-- notes -->
-  <h5 class="my-3">Notes</h5>
+  <div class="d-flex justify-content-between">
+    <h5 class="my-3">Notes</h5>
+    <button class="edit-button" data-toggle="modal" data-target="#editPlantModal"><i class="fas fa-pen"></i></button>
+  </div>
+
   <div class="card note-card">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh laoreet sem odio metus consequat sed eu neque aliquet. At condimentum nisl lobortis mauris, et.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh laoreet sem odio metus consequat sed eu neque aliquet. At condimentum nisl lobortis mauris, et.
@@ -97,3 +101,52 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     </div>
   </div>
 </div>
+
+<!-- edit plant modal -->
+
+<div class="modal fade" id="editPlantModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier plante</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <%= simple_form_for [@plant] do |f| %>
+            <%= f.input :name,
+                        label: false,
+                        placeholder: "Nom*",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :notes,
+                        label: false,
+                        placeholder: "Notes",
+                        input_html: { class: "col-12 mb-3" } %>
+
+            <%= f.input :category,
+                        placeholder: "Type de plante",
+                        as: :select,
+                        collection: Plant::CATEGORIES,
+                        input_html: { class: "col-12" } %>
+
+            <%= f.input :photo,
+                          as: :file,
+                          input_html: { class: "d-none", id: 'photo-input' },
+                          label_html: { class: 'upload-photo col-12 text-center'},
+                          label: '📷 Choisissez une photo' %>
+            <%#= image_tag "", width: 300, class: "hidden mx-auto mb-2", id: "photo-preview" %>
+            <div class="row">
+              <%= link_to 'Annuler', plant_path(@plant), class: "btn btn-outline-danger col-6" %>
+              <%= f.submit 'Valider', class: "btn btn-primary col-6" %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
