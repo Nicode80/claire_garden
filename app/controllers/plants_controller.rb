@@ -18,6 +18,15 @@ class PlantsController < ApplicationController
     @plant = Plant.find(params[:id])
   end
 
+  def update
+    @plant = Plant.find(params[:id])
+    @plant.update(plant_params)
+    if @plant.save
+      flash[:notice] = "plante mise à jour"
+      redirect_to plant_path(@plant)
+    end
+  end
+
   private
 
   def plant_params
