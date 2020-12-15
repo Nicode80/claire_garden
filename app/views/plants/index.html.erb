@@ -134,7 +134,7 @@
             <%#= image_tag "", width: 300, class: "hidden mx-auto mb-2", id: "photo-preview" %>
             <div class="row">
               <%= link_to 'Annuler', plants_path, class: "btn btn-outline-danger col-6" %>
-              <%= f.submit 'Valider', class: "btn btn-primary col-6" %>
+              <%= f.submit 'Valider', class: "btn btn-primary col-6 disabled", id: 'new-plant-submit' %>
             </div>
           <% end %>
 
