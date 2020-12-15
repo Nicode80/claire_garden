@@ -4,4 +4,6 @@ class Plant < ApplicationRecord
   CATEGORIES = ['Fleurs', 'Arbres fruitiers', 'Arbres']
 
   has_one_attached :photo
+
+  validates :name, presence: true
 end
