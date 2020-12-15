@@ -1,1 +1,99 @@
-<h1>plant show</h1>
+<!-- Banner -->
+
+<div class="banner"
+style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+<% if @plant.photo.attached? %>
+  url(<%= cl_image_path @plant.photo.key, height: 500, crop: :fill %>);
+<% else %>
+  url(<%= image_path('flower_placeholder.jpg') %>);
+<% end %>">
+  <div class="dropdown align-self-end">
+    <!-- avatar -->
+    <% if current_user.photo.attached? %>
+      <%= cl_image_tag current_user.photo.key, width: 56, height: 56, crop: :fill, class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+    <% else %>
+      <%= image_tag "avatar_placeholder.svg", alt: "avatar", class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+    <% end %>
+    <!-- dropdown-menu from avatar -->
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+      <%= link_to "Action", "#", class: "dropdown-item" %>
+      <%= link_to "Another action", "#", class: "dropdown-item" %>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+    </div>
+  </div>
+
+
+<h3><%= @plant.name %></h3>
+</div>
+
+<!-- page content -->
+<div class="container" style="margin-bottom: 75px;">
+
+  <!-- notes -->
+  <h5 class="my-3">Notes</h5>
+  <div class="card note-card">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh laoreet sem odio metus consequat sed eu neque aliquet. At condimentum nisl lobortis mauris, et.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh laoreet sem odio metus consequat sed eu neque aliquet. At condimentum nisl lobortis mauris, et.
+  </div>
+
+  <!-- Actions -->
+  <h5 class="my-3">Actions</h5>
+  <!-- dropdown filter -->
+  <div class="col-12 px-2">
+    <%= form_tag plant_path(@plant), method: :get, class: "dropdown-filter", id: "filter-form" do %>
+      <%= label_tag "Saison" %>
+      <%= select_tag "Saison", options_for_select( ["Printemps", "Eté", "Automne", "Hiver"] ), {:include_blank => true} %>
+      <%= submit_tag "Apply filters", class: 'btn btn-primary', id: "filter-form-button" %>
+    <% end %>
+  </div>
+
+  <!-- Action cards -->
+    <div class="card action-card">
+      <% if @plant.photo.attached? %>
+        <%= cl_image_tag @plant.photo.key, height: 100, crop: :fill %>
+      <% else %>
+        <%= image_tag('action_placeholder.jpg') %>
+      <% end %>
+      <section>
+        <div class="d-flex justify-content-end mb-2">
+          <span class="badge badge-pill badge-success mx-2">Automne</span>
+          <span class="badge badge-pill badge-warning mx-2">Tous les ans</span>
+        </div>
+        <h6>Suppression fleurs fanées en les coupant à la base de la fleur, attention à couper au dessus des bourgeons verdoyants</h6>
+      </section>
+    </div>
+
+</div>
+
+<!-- Add a new action button -->
+    <button class="btn btn-primary claire-garden-button button-sticky-bottom" data-toggle="modal" data-target="#newActionModal">AJOUTER UNE ACTION</button>
+
+<!-- new action modal -->
+
+<div class="modal fade" id="newActionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nouvelle action</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <%#= simple_form_for [@action] do |f| %>
+            <%#= f.input :name,
+                        label: false,
+                        placeholder: "Nom*",
+                        input_html: { class: "col-12 mb-3" } %>
+            <div class="row">
+              <%= link_to 'Annuler', plant_path(@plant), class: "btn btn-outline-danger col-6" %>
+              <%#= f.submit 'Valider', class: "btn btn-primary col-6 disabled", id: 'new-plant-submit' %>
+            </div>
+          <%# end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

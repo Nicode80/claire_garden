@@ -1,10 +1,10 @@
 <!-- Banner -->
 
-<div class="banner d-flex justify-content-end" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= image_path('banner_placeholder.svg') %>);">
-  <div class="dropdown">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= image_path('banner_placeholder.svg') %>);">
+  <div class="dropdown align-self-end">
     <!-- avatar -->
-    <% if @user.photo.attached? %>
-      <%= cl_image_tag @user.photo.key, width: 56, height: 56, crop: :fill, class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+    <% if current_user.photo.attached? %>
+      <%= cl_image_tag current_user.photo.key, width: 56, height: 56, crop: :fill, class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
     <% else %>
       <%= image_tag "avatar_placeholder.svg", alt: "avatar", class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
     <% end %>
@@ -55,12 +55,12 @@
         </div>
       </div>
     </div>
-
+    <!-- plant cards -->
     <div class="container">
       <div class="row">
         <% @plants.each do |plant| %>
-          <div class="col-6 px-2">
-            <div class="plant-card"
+          <%= link_to plant_path(plant),class: 'text-decoration-none col-6 px-2' do %>
+            <div class="card plant-card"
               style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
               <% if plant.photo.attached? %>
                 url(<%= cl_image_path plant.photo.key, height: 500, crop: :fill %>);
@@ -69,14 +69,14 @@
               <% end %>">
               <h4><%= plant.name %></h4>
             </div>
-          </div>
+          <% end %>
         <% end %>
       </div>
-
     </div>
 
-    <p>plants cards</p>
+    <!-- Add a new plant button -->
     <button class="btn btn-primary claire-garden-button button-sticky-bottom" data-toggle="modal" data-target="#newPlantModal">AJOUTER UNE PLANTE</button>
+
   </div>
 
 
