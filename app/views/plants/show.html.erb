@@ -39,7 +39,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     <%= @plant.notes %>
   </div>
 
-  <!-- Actions -->
+  <!-- Taskss -->
   <h5 class="my-3">Actions</h5>
   <!-- dropdown filter -->
   <div class="col-12 px-2">
@@ -50,21 +50,23 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     <% end %>
   </div>
 
-  <!-- Action cards -->
+  <!-- Task cards -->
+  <% @tasks.each do |task| %>
     <div class="card action-card">
-      <% if @plant.photo.attached? %>
-        <%= cl_image_tag @plant.photo.key, height: 100, crop: :fill %>
+      <% if task.photo.attached? %>
+        <%= cl_image_tag task.photo.key, height: 100, crop: :fill %>
       <% else %>
-        <%= image_tag('action_placeholder.jpg') %>
+        <%= image_tag('task_placeholder.jpg') %>
       <% end %>
       <section>
         <div class="d-flex justify-content-end mb-2">
-          <span class="badge badge-pill badge-success mx-2">Automne</span>
-          <span class="badge badge-pill badge-warning mx-2">Tous les ans</span>
+          <span class="badge badge-pill badge-success mx-2"><%= task.season %></span>
+          <span class="badge badge-pill badge-warning mx-2"><%= task.periodicity %></span>
         </div>
-        <h6>Suppression fleurs fanées en les coupant à la base de la fleur, attention à couper au dessus des bourgeons verdoyants</h6>
+        <h6><%= task.name %></h6>
       </section>
     </div>
+  <% end %>
 
 </div>
 
