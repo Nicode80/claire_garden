@@ -15,10 +15,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:photo])
   end
 
-  protected
+  # protected
 
-  def authenticate_user!
-    redirect_to root_path, notice: "Vous devez être connecté" unless user_signed_in?
-  end
+  # def authenticate_user!
+  #   redirect_to root_path, notice: "Vous devez être connecté" unless user_signed_in?
+  # end
 
 end
