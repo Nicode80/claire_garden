@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :set_task, only: [:show, :update, :destroy]
 
   def create
     @task = Task.new(task_params)
@@ -10,13 +11,11 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
     @plant = @task.plant
     @season = season(@task)
   end
 
   def update
-    @task = Task.find(params[:id])
     @task.update(task_params)
     if @task.save
       flash[:notice] = "Action mise à jour"
@@ -25,7 +24,6 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
     redirect_to plant_path(@task.plant)
   end
@@ -40,6 +38,10 @@ class TasksController < ApplicationController
       :periodicity,
       :content,
       :photo)
+  end
+
+  def set_task
+    @task = Task.find(params[:id])
   end
 
   def season(task)
@@ -67,3 +69,6 @@ class TasksController < ApplicationController
     end
   end
 end
+
+
+
