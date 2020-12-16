@@ -84,16 +84,16 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       </div>
       <div class="modal-body">
         <div class="container">
-          <%#= simple_form_for [@action] do |f| %>
-            <%#= f.input :name,
+          <%= simple_form_for [@plant, @task] do |f| %>
+            <%= f.input :name,
                         label: false,
                         placeholder: "Nom*",
                         input_html: { class: "col-12 mb-3" } %>
             <div class="row">
               <%= link_to 'Annuler', plant_path(@plant), class: "btn btn-outline-danger col-6" %>
-              <%#= f.submit 'Valider', class: "btn btn-primary col-6 disabled", id: 'new-plant-submit' %>
+              <%= f.submit 'Valider', class: "btn btn-primary col-6 disabled", id: 'new-plant-submit' %>
             </div>
-          <%# end %>
+          <% end %>
 
         </div>
       </div>
