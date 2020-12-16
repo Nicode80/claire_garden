@@ -88,13 +88,49 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
             <%= f.input :name,
                         label: false,
                         placeholder: "Nom*",
-                        input_html: { class: "col-12 mb-3" } %>
+                        input_html: { class: "col-12 mb-3"} %>
+            <div class="row">
+              <div class="col-6">
+                <%= f.input :start_date,
+                            discard_day: true,
+                            discard_year: true,
+                            label: "débute",
+                            input_html: { class: "col-12 mb-3"},
+                            label_html: { class: "align-self-center"},
+                            wrapper_html: { class: 'd-flex flex-column' }
+                %>
+              </div>
+              <div class="col-6">
+                <%= f.input :end_date,
+                            discard_day: true,
+                            discard_year: true,
+                            label: "termine",
+                            input_html: { class: "col-12 mb-3"},
+                            label_html: { class: "align-self-center"},
+                            wrapper_html: { class: 'd-flex flex-column' }
+                %>
+              </div>
+            </div>
+            <%= f.input :periodicity,
+                        label: "Périodicité",
+                        placeholder: "Annuel",
+                        as: :select,
+                        collection: Task::PERIODICITES,
+                        input_html: { class: "col-12 mb-3"} %>
+            <%= f.input :content,
+                        label: false,
+                        placeholder: "Couper les branches en laissant 2 noeuds",
+                        input_html: { class: "col-12 mb-3"} %>
+            <%= f.input :photo,
+                        as: :file,
+                        input_html: { class: "d-none", id: 'photo-input' },
+                        label_html: { class: 'upload-photo col-12 text-center'},
+                        label: '📷 Choisissez une photo' %>
             <div class="row">
               <%= link_to 'Annuler', plant_path(@plant), class: "btn btn-outline-danger col-6" %>
-              <%= f.submit 'Valider', class: "btn btn-primary col-6 disabled", id: 'new-plant-submit' %>
+              <%= f.submit 'Valider', class: "btn btn-primary col-6 disabled", id: 'new-tache-submit' %>
             </div>
           <% end %>
-
         </div>
       </div>
     </div>
