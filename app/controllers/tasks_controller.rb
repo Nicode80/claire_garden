@@ -12,7 +12,7 @@ class TasksController < ApplicationController
 
   def show
     @plant = @task.plant
-    @season = season(@task)
+    @season = @task.season
   end
 
   def update
