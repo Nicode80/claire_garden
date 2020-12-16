@@ -14,4 +14,11 @@ class ApplicationController < ActionController::Base
     # For additional in app/views/devise/registrations/edit.html.erb
     devise_parameter_sanitizer.permit(:account_update, keys: [:photo])
   end
+
+  # protected
+
+  # def authenticate_user!
+  #   redirect_to root_path, notice: "Vous devez être connecté" unless user_signed_in?
+  # end
+
 end

@@ -16,6 +16,7 @@ class PlantsController < ApplicationController
 
   def show
     @plant = Plant.find(params[:id])
+    @task = Task.new
   end
 
   def update
