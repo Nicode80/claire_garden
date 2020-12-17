@@ -53,7 +53,8 @@
   padding: 1rem;
 }
 
-.action-card {
+.task-card {
+  color: $claire-text;
   display: flex;
   flex-direction: row;
   background-color: $claire-card-background;
@@ -74,4 +75,12 @@
     width: 100%;
     padding: 10px;
   }
+}
+
+.plant-name-in-task-card {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 26vw;
+  white-space: nowrap;
+  font-weight: bold;
 }
