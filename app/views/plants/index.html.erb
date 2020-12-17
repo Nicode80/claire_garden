@@ -36,7 +36,7 @@
       <div class="row">
         <!-- dropdown filter -->
         <div class="col-6 px-2">
-          <%= form_tag plants_path, method: :get, class: "dropdown-filter", id: "filter-form" do %>
+          <%= form_tag plants_path, method: :get, class: "column-filter dropdown-filter", id: "filter-form" do %>
             <%= label_tag "Type de plante" %>
             <%= select_tag "Type de plante", options_for_select( Plant::CATEGORIES ), {:include_blank => true} %>
             <%= submit_tag "Apply filters", class: 'btn btn-primary', id: "filter-form-button" %>
@@ -55,6 +55,7 @@
         </div>
       </div>
     </div>
+
     <!-- plant cards -->
     <div class="container">
       <div class="row">
@@ -79,22 +80,60 @@
 
   </div>
 
-
-
-
   <!-- my-calendar-Tab -->
 
   <div class="tab-pane" id="tab-my-calendar">
-    <h3>Type de plante</h3>
-    <p>calendrier</p>
-    <h3>Actions</h3>
-    <p>Actions cards</p>
+    <div class="container">
+      <!-- dropdown filter -->
+      <%= form_tag plants_path, method: :get, class: "inline-filter dropdown-filter row px-2 mb-3", id: "filter-form" do %>
+        <div class="col-6 d-flex justify-content-center align-items-center p-0">
+          <%= label_tag "Type de plante" %>
+        </div>
+        <div class="col-6 p-0">
+          <%= select_tag "Type de plante", options_for_select( Plant::CATEGORIES ), {:include_blank => true} %>
+        </div>
+        <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button" %>
+      <% end %>
+
+      <!-- calendar -->
+      <div class="row text-center">
+        <%= form_tag plants_path, method: :get, class: "month-filter_search", id: "month-filter-form" do %>
+          <% ["janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"].each do |month| %>
+            <%= check_box_tag "month[#{month}]", month, params[:month]&.include?(month) %>
+            <%= label_tag "month[#{month}]", month, style: '', class: "col-3 text-center p-0" %>
+          <% end %>
+          <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button" %>
+        <% end %>
+      </div>
+
+      <!-- Tasks -->
+      <h5 class="my-3">Actions</h5>
+      <!-- tasks cards -->
+      <% @tasks.each do |task| %>
+        <%= link_to task_path(task), class: 'text-decoration-none' do %>
+          <div class="card task-card">
+            <% if task.photo.attached? %>
+              <%= cl_image_tag task.photo.key, height: 100, crop: :fill %>
+            <% else %>
+              <%= image_tag('task_placeholder.jpg') %>
+            <% end %>
+            <section>
+              <div class="d-flex justify-content-between">
+                <span class="plant-name-in-task-card"><%= task.plant.name %></span>
+                <div class="d-flex justify-content-end mb-2">
+                  <span class="badge badge-pill badge-success mx-2"><%= task.season %></span>
+                  <span class="badge badge-pill badge-warning mx-2"><%= task.periodicity %></span>
+                </div>
+              </div>
+              <h6><%= task.name %></h6>
+            </section>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-
-
-
-
 </div>
+
 
 <!-- new plant modal -->
 
