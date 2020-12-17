@@ -52,20 +52,22 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
   <!-- Task cards -->
   <% @tasks.each do |task| %>
-    <div class="card action-card">
-      <% if task.photo.attached? %>
-        <%= cl_image_tag task.photo.key, height: 100, crop: :fill %>
-      <% else %>
-        <%= image_tag('task_placeholder.jpg') %>
-      <% end %>
-      <section>
-        <div class="d-flex justify-content-end mb-2">
-          <span class="badge badge-pill badge-success mx-2"><%= task.season %></span>
-          <span class="badge badge-pill badge-warning mx-2"><%= task.periodicity %></span>
-        </div>
-        <h6><%= task.name %></h6>
-      </section>
-    </div>
+    <%= link_to task_path(task), class: 'text-decoration-none' do %>
+      <div class="card action-card">
+        <% if task.photo.attached? %>
+          <%= cl_image_tag task.photo.key, height: 100, crop: :fill %>
+        <% else %>
+          <%= image_tag('task_placeholder.jpg') %>
+        <% end %>
+        <section>
+          <div class="d-flex justify-content-end mb-2">
+            <span class="badge badge-pill badge-success mx-2"><%= task.season %></span>
+            <span class="badge badge-pill badge-warning mx-2"><%= task.periodicity %></span>
+          </div>
+          <h6><%= task.name %></h6>
+        </section>
+      </div>
+    <% end %>
   <% end %>
 
 </div>
