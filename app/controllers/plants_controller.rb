@@ -13,8 +13,10 @@ class PlantsController < ApplicationController
   def index
     if params[:plant_type].nil? || params[:plant_type] == "Tous"
       @plants = Plant.where(user_id: current_user.id)
+      @selected_category = "Tous"
     else
       @plants = Plant.where(user_id: current_user.id).where(category: params[:plant_type])
+      @selected_category = params[:plant_type]
     end
     @plant = Plant.new
     @tasks = @plants.map { |plant| plant.tasks }.flatten
