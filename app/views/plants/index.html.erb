@@ -46,8 +46,8 @@
         <div class="col-6 px-2">
           <%= form_tag plants_path, method: :get do %>
             <%= label_tag "Recherche" %>
-            <%= text_field_tag :query,
-              params[:query],
+            <%= text_field_tag :plant_query,
+              params[:plant_query],
               class: "form-control",
               placeholder: "trouver une plante"
             %>

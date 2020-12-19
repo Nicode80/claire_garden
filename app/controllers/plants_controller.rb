@@ -11,13 +11,27 @@ class PlantsController < ApplicationController
 #   end
 
   def index
-    if params[:plant_type].nil? || params[:plant_type] == "Tous"
-      @plants = Plant.where(user_id: current_user.id)
+    if params[:plant_query].present? && params[:plant_query] != ""
+      @plants = Plant.where(user_id: current_user.id).search_by_name(params[:plant_query])
       @selected_category = "Tous"
-    else
+    elsif params[:plant_type].present? && params[:plant_type] != "Tous"
       @plants = Plant.where(user_id: current_user.id).where(category: params[:plant_type])
       @selected_category = params[:plant_type]
+    else
+      @plants = Plant.where(user_id: current_user.id)
+      @selected_category = "Tous"
     end
+    # if params[:plant_type].nil? || params[:plant_type] == "Tous" || params[:plant_query] == ""
+    #   @plants = Plant.where(user_id: current_user.id)
+    #   @selected_category = "Tous"
+    # elsif params[:plant_type]
+    #   @plants = Plant.where(user_id: current_user.id).where(category: params[:plant_type])
+    #   @selected_category = params[:plant_type]
+    # elsif params[:plant_query].present?
+    #   @plants = Plant.where(user_id: current_user.id).search_by_name(params[:plant_query])
+    #   @selected_category = "Tous"
+
+    # end
     @plant = Plant.new
     @tasks = @plants.map { |plant| plant.tasks }.flatten
     # respond_to do |format|
