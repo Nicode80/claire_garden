@@ -39,7 +39,7 @@
           <%= form_tag plants_path, method: :get, class: "column-filter dropdown-filter", id: "plant-tab-filter-form" do %>
             <%= label_tag "Type de plante" %>
             <%= select_tag "plant_type", options_for_select( Plant::CATEGORIES, @selected_category ) %>
-            <%= submit_tag "Apply filters", class: 'btn btn-primary', id: "filter-form-button", name: nil %>
+            <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button", name: nil %>
           <% end %>
         </div>
         <!-- search bar -->
