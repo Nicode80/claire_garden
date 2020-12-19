@@ -59,19 +59,7 @@
     <!-- plant cards -->
     <div class="container">
       <div class="row">
-        <% @plants.each do |plant| %>
-          <%= link_to plant_path(plant), class: 'text-decoration-none col-6 px-2' do %>
-            <div class="card plant-card"
-              style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-              <% if plant.photo.attached? %>
-                url(<%= cl_image_path plant.photo.key, height: 500, crop: :fill %>);
-              <% else %>
-                url(<%= image_path('flower_placeholder.jpg') %>);
-              <% end %>">
-              <h4><%= plant.name %></h4>
-            </div>
-          <% end %>
-        <% end %>
+        <%= render 'plant_cards', plants: @plants %>
       </div>
     </div>
 
@@ -109,27 +97,7 @@
       <!-- Tasks -->
       <h5 class="my-3">Actions</h5>
       <!-- tasks cards -->
-      <% @tasks.each do |task| %>
-        <%= link_to task_path(task), class: 'text-decoration-none' do %>
-          <div class="card task-card">
-            <% if task.photo.attached? %>
-              <%= cl_image_tag task.photo.key, height: 100, crop: :fill %>
-            <% else %>
-              <%= image_tag('task_placeholder.jpg') %>
-            <% end %>
-            <section>
-              <div class="d-flex justify-content-between">
-                <span class="plant-name-in-task-card"><%= task.plant.name %></span>
-                <div class="d-flex justify-content-end mb-2">
-                  <span class="badge badge-pill badge-success mx-2"><%= task.season %></span>
-                  <span class="badge badge-pill badge-warning mx-2"><%= task.periodicity %></span>
-                </div>
-              </div>
-              <h6><%= task.name %></h6>
-            </section>
-          </div>
-        <% end %>
-      <% end %>
+      <%= render 'task_cards', tasks: @tasks %>
     </div>
   </div>
 </div>
