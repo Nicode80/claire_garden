@@ -36,10 +36,10 @@
       <div class="row">
         <!-- dropdown filter -->
         <div class="col-6 px-2">
-          <%= form_tag plants_path, method: :get, class: "column-filter dropdown-filter", id: "filter-form" do %>
+          <%= form_tag plants_path, method: :get, class: "column-filter dropdown-filter", id: "plant-tab-filter-form" do %>
             <%= label_tag "Type de plante" %>
-            <%= select_tag "Type de plante", options_for_select( Plant::CATEGORIES ), {:include_blank => true} %>
-            <%= submit_tag "Apply filters", class: 'btn btn-primary', id: "filter-form-button" %>
+            <%= select_tag "plant_type", options_for_select( Plant::CATEGORIES ) %>
+            <%= submit_tag "Apply filters", class: 'btn btn-primary', id: "filter-form-button", name: nil %>
           <% end %>
         </div>
         <!-- search bar -->
@@ -85,12 +85,12 @@
   <div class="tab-pane" id="tab-my-calendar">
     <div class="container">
       <!-- dropdown filter -->
-      <%= form_tag plants_path, method: :get, class: "inline-filter dropdown-filter row px-2 mb-3", id: "filter-form" do %>
+      <%= form_tag plants_path, method: :get, class: "inline-filter dropdown-filter row px-2 mb-3", id: "calendar-tab-filter-form" do %>
         <div class="col-6 d-flex justify-content-center align-items-center p-0">
           <%= label_tag "Type de plante" %>
         </div>
         <div class="col-6 p-0">
-          <%= select_tag "Type de plante", options_for_select( Plant::CATEGORIES ), {:include_blank => true} %>
+          <%= select_tag "plant_type", options_for_select( Plant::CATEGORIES ) %>
         </div>
         <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button" %>
       <% end %>

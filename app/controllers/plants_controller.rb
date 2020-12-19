@@ -1,9 +1,27 @@
 class PlantsController < ApplicationController
+# def index
+#     if params[:plant_query].nil? || params[:plant_query] == ""
+#       @plants = Plant.where(user_id: current_user.id)
+#     else
+#       @plants = Plant.where(user_id: current_user.id).search_by_name(params[:plant_query])
+#     end
+#     @plant = Plant.new
+#     @tasks = @plants.map { |plant| plant.tasks }.flatten
+
+#   end
 
   def index
-    @plants = Plant.where(user_id: current_user.id)
+    if params[:plant_type].nil? || params[:plant_type] == "Tous"
+      @plants = Plant.where(user_id: current_user.id)
+    else
+      @plants = Plant.where(user_id: current_user.id).where(category: params[:plant_type])
+    end
     @plant = Plant.new
-    @tasks = Task.all
+    @tasks = @plants.map { |plant| plant.tasks }.flatten
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: { plants: @plants } }
+    # end
   end
 
   def create
