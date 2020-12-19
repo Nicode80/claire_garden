@@ -8,7 +8,7 @@ const dropdownAutoSubmit = (formId, inputId) => {
   });
 }
 
-const plantDropdownAutoSubmit = dropdownAutoSubmit('#plant-tab-filter-form', '#plant_type')
-const taskDropdownAutoSubmit = dropdownAutoSubmit('#calendar-tab-filter-form', '#plant_type')
+const plantDropdownAutoSubmit = dropdownAutoSubmit('#plant-tab-filter-form', '#plant_type');
+const taskDropdownAutoSubmit = dropdownAutoSubmit('#calendar-tab-filter-form', '#plant_type');
 
 export { plantDropdownAutoSubmit, taskDropdownAutoSubmit }
