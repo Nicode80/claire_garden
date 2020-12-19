@@ -39,7 +39,7 @@
           <%= form_tag plants_path, method: :get, class: "column-filter dropdown-filter", id: "plant-tab-filter-form" do %>
             <%= label_tag "Type de plante" %>
             <%= select_tag "plant_type", options_for_select( Plant::CATEGORIES, @selected_category ) %>
-            <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button", name: nil %>
+            <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', name: nil %>
           <% end %>
         </div>
         <!-- search bar -->
@@ -90,9 +90,9 @@
           <%= label_tag "Type de plante" %>
         </div>
         <div class="col-6 p-0">
-          <%= select_tag "plant_type2", options_for_select( Plant::CATEGORIES, @selected_category ) %>
+          <%= select_tag "plant_type", options_for_select( Plant::CATEGORIES, @selected_category ) %>
         </div>
-        <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button" %>
+        <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', name: nil %>
       <% end %>
 
       <!-- calendar -->
@@ -102,7 +102,7 @@
             <%= check_box_tag "month[#{month}]", month, params[:month]&.include?(month) %>
             <%= label_tag "month[#{month}]", month, style: '', class: "col-3 text-center p-0" %>
           <% end %>
-          <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', id: "filter-form-button" %>
+          <%= submit_tag "Apply filters", class: 'btn btn-primary', name: nil %>
         <% end %>
       </div>
 
