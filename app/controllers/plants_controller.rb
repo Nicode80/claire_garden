@@ -1,6 +1,7 @@
 class PlantsController < ApplicationController
 
   def index
+    @params = params.select { |_key, value| ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'].include? value }.keys.map(&:to_i)
     if params[:plant_query].present? && params[:plant_query] != ""
       @plants = Plant.where(user_id: current_user.id).search_by_name(params[:plant_query])
       @selected_category = "Tous"
