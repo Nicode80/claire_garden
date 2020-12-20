@@ -20,6 +20,22 @@ class Task < ApplicationRecord
     end
   end
 
+  def months
+    start_month = self.start_date.month
+    end_month = self.end_date.month
+    months = []
+    if start_month <= end_month
+      for month in (start_month..end_month)
+        months << month
+      end
+    else
+      for month in (start_month..(12 + end_month))
+        months << month
+      end
+    end
+    months.to_a.map { |month| month > 12 ? month = month - 12 : month }
+  end
+
   private
 
   def mean_month(start_month, end_month)
