@@ -44,6 +44,7 @@ class PlantsController < ApplicationController
     @task = Task.new
     if params[:season].present? && params[:season] != "Toutes"
       tasks = @plant.tasks
+      @season = params[:season]
       @tasks = tasks.select { |task| task.season == params[:season] }
     else
       @tasks = @plant.tasks
