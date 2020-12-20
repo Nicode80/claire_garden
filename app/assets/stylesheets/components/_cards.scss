@@ -84,3 +84,13 @@
   white-space: nowrap;
   font-weight: bold;
 }
+
+.search-card {
+  padding: 1vw;
+  border-radius: 10px;
+  box-shadow: $claire-shadow;
+  border: none;
+  background-color: rgba(250, 250, 250, 0.5);
+  color: white;
+  font-weight: bold;
+}
