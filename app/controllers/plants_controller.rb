@@ -39,9 +39,15 @@ class PlantsController < ApplicationController
   end
 
   def show
+    # raise
     @plant = Plant.find(params[:id])
     @task = Task.new
-    @tasks = @plant.tasks
+    if params[:season].present? && params[:season] != "Toutes"
+      tasks = @plant.tasks
+      @tasks = tasks.select { |task| task.season == params[:season] }
+    else
+      @tasks = @plant.tasks
+    end
   end
 
   def update
