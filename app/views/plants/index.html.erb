@@ -69,7 +69,6 @@
   </div>
 
   <!-- my-calendar-Tab -->
-  <%= @params %>
 
   <div class="tab-pane" id="tab-my-calendar">
     <div class="container">
@@ -88,7 +87,7 @@
       <div class="row text-center">
         <%= form_tag plants_path, method: :get, class: "month-filter_search", id: "month-filter-form" do %>
           <% {Janvier: 1, Février: 2, Mars: 3, Avril: 4, Mai: 5, Juin: 6, Juillet: 7, Août: 8, Septembre: 9, Octobre: 10, Novembre: 11, Décembre: 12 }.each do |month, number| %>
-            <% if @params.include? number %>
+            <% if @calendar_params.include? number %>
               <%= check_box_tag number, month, true %>
               <%= label_tag number, month, style: '', class: "col-3 text-center p-0" %>
             <% else %>
