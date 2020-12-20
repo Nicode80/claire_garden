@@ -44,7 +44,14 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
     <!-- saison and periodicity badges -->
     <div class="d-flex justify-content-end mb-2">
-      <span class="badge badge-pill badge-success m-2"><%= @season %></span>
+      <span class="badge badge-pill badge-success m-2">
+        <% if @task.months.empty? %>
+        <% elsif @task.months.length == 1 %>
+          <%= @task.start_date.strftime('%b') %>
+        <% else %>
+          <%= @task.start_date.strftime('%b') %> - <%= @task.end_date.strftime('%b') %>
+        <% end %>
+      </span>
       <span class="badge badge-pill badge-warning m-2"><%= @task.periodicity %></span>
     </div>
   </div>
