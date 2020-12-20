@@ -15,10 +15,15 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:photo])
   end
 
-  # protected
+  protected
 
-  # def authenticate_user!
-  #   redirect_to root_path, notice: "Vous devez être connecté" unless user_signed_in?
-  # end
-
+  def authenticate_user!
+    if user_signed_in?
+      super
+    else
+      redirect_to root_path, notice: 'Vous devez être connecté'
+      ## if you want render 404 page
+      ## render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+    end
+  end
 end
