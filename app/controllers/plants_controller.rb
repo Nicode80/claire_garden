@@ -1,17 +1,18 @@
 class PlantsController < ApplicationController
 
   def index
-    # plants filter (dropdown and search)
-    if params[:plant_query].present? && params[:plant_query] != ""
-      @plants = Plant.where(user_id: current_user.id).search_by_name(params[:plant_query])
-      @selected_category = "Tous"
-    elsif params[:plant_type].present? && params[:plant_type] != "Tous"
-      @plants = Plant.where(user_id: current_user.id).where(category: params[:plant_type])
-      @selected_category = params[:plant_type]
-    else
-      @plants = Plant.where(user_id: current_user.id)
-      @selected_category = "Tous"
-    end
+    # # non ajax plants filter (dropdown and search)
+    # if params[:plant_query].present? && params[:plant_query] != ""
+    #   @plants = Plant.where(user_id: current_user.id).search_by_name(params[:plant_query])
+    #   @selected_category = "Tous"
+    # elsif params[:plant_type].present? && params[:plant_type] != "Tous"
+    #   @plants = Plant.where(user_id: current_user.id).where(category: params[:plant_type])
+    #   @selected_category = params[:plant_type]
+    # else
+    #   @plants = Plant.where(user_id: current_user.id)
+    #   @selected_category = "Tous"
+    # end
+    @plants = Plant.where(user_id: current_user.id)
     @plant = Plant.new
 
     # tasks filter (calendar)
