@@ -39,9 +39,23 @@ const ajaxSeasonDropdownFilter = () => {
   if(!seasonDropdown) return;
 
   seasonDropdown.addEventListener('change', event => {
-    console.log(event.currentTarget.value);
-  });
+    // Select only plant and task cards links
+    const taskCards = document.querySelector('#task-cards');
+    const tasks = taskCards.querySelectorAll("a");
 
+    // reset d-none for all cards
+    tasks.forEach(task => {
+      task.classList.remove('d-none');
+    });
+
+    if (event.currentTarget.value !== "Toutes") {
+      tasks.forEach(task => {
+        if (event.currentTarget.value !== task.dataset.plantSeason) {
+          task.classList.add('d-none'); //hide non selected cards
+        }
+      });
+    }
+  });
 }
 
 export { ajaxPlantTypeDropdownFilter, ajaxSeasonDropdownFilter }
