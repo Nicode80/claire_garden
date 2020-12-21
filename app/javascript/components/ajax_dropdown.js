@@ -1,4 +1,4 @@
-const ajaxDropdownFilterPlantAndTaskCards = () => {
+const ajaxPlantTypeDropdownFilter = () => {
   const form = document.querySelector('#plant-tab-filter-form');
   if(!form) return;
 
@@ -34,4 +34,14 @@ const ajaxDropdownFilterPlantAndTaskCards = () => {
   });
 }
 
-export { ajaxDropdownFilterPlantAndTaskCards }
+const ajaxSeasonDropdownFilter = () => {
+  const seasonDropdown = document.querySelector('#season');
+  if(!seasonDropdown) return;
+
+  seasonDropdown.addEventListener('change', event => {
+    console.log(event.currentTarget.value);
+  });
+
+}
+
+export { ajaxPlantTypeDropdownFilter, ajaxSeasonDropdownFilter }
