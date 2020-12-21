@@ -1,17 +1,22 @@
-const ajaxDropdownPlantCards = () => {
+const ajaxDropdownFilterPlantAndTaskCards = () => {
   const form = document.querySelector('#plant-tab-filter-form');
   if(!form) return;
 
   const input = form.querySelector('#plant_type');
 
   input.addEventListener('change', event => {
-    // Select only plant cards links
+    // Select only plant and task cards links
     const plantCards = document.querySelector('#plant-cards');
     const plants = plantCards.querySelectorAll("a");
+    const taskCards = document.querySelector('#task-cards');
+    const tasks = taskCards.querySelectorAll("a");
 
     // reset d-none for all cards
     plants.forEach(plant => {
       plant.classList.remove('d-none');
+    });
+    tasks.forEach(task => {
+      task.classList.remove('d-none');
     });
 
     if (event.currentTarget.value !== "Tous") {
@@ -20,8 +25,13 @@ const ajaxDropdownPlantCards = () => {
           plant.classList.add('d-none'); //hide non selected cards
         }
       });
+      tasks.forEach(task => {
+        if (event.currentTarget.value !== task.dataset.plantCategory) {
+          task.classList.add('d-none'); //hide non selected cards
+        }
+      });
     }
   });
 }
 
-export { ajaxDropdownPlantCards }
+export { ajaxDropdownFilterPlantAndTaskCards }

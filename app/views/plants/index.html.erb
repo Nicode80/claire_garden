@@ -93,7 +93,9 @@
       <!-- Tasks -->
       <h5 class="my-3">Actions</h5>
       <!-- tasks cards -->
-      <%= render 'task_cards', tasks: @tasks %>
+      <div id="task-cards">
+        <%= render 'task_cards', tasks: @tasks %>
+      </div>
     </div>
   </div>
 </div>
