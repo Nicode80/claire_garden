@@ -28,13 +28,13 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { plantCreateSafe, taskCreateSafe } from '../components/create_safe';
-import { plantDropdownAutoSubmit, taskDropdownAutoSubmit, seasonDropdownAutoSubmit } from '../components/dropdown_auto_submit';
+// import { plantDropdownAutoSubmit, seasonDropdownAutoSubmit } from '../components/dropdown_auto_submit';
+import { ajaxDropdownPlantCards } from '../components/ajax_dropdown';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   plantCreateSafe();
   taskCreateSafe();
-  // plantDropdownAutoSubmit;
-  // taskDropdownAutoSubmit;
+  ajaxDropdownPlantCards();
 });
