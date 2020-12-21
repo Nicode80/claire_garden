@@ -1,5 +1,5 @@
 <% plants.each do |plant| %>
-  <%= link_to plant_path(plant), class: 'text-decoration-none col-6 px-2' do %>
+  <%= link_to plant_path(plant), class: 'text-decoration-none col-6 px-2', "data-plant-category" => plant.category, "data-plant-name" => plant.name do %>
     <div class="card plant-card"
       style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       <% if plant.photo.attached? %>
