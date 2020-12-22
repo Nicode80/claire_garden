@@ -1,18 +1,16 @@
 class PlantsController < ApplicationController
 
   def index
-    # # non ajax plants filter (dropdown and search)
-    # if params[:plant_query].present? && params[:plant_query] != ""
-    #   @plants = Plant.where(user_id: current_user.id).search_by_name(params[:plant_query])
-    #   @selected_category = "Tous"
-    # elsif params[:plant_type].present? && params[:plant_type] != "Tous"
-    #   @plants = Plant.where(user_id: current_user.id).where(category: params[:plant_type])
-    #   @selected_category = params[:plant_type]
-    # else
-    #   @plants = Plant.where(user_id: current_user.id)
-    #   @selected_category = "Tous"
-    # end
     @plants = Plant.where(user_id: current_user.id)
+    # non ajax plants filter (dropdown and search)
+    if params[:plant_query].present? && params[:plant_query] != ""
+      @plants = @plants.search_by_name(params[:plant_query])
+      @selected_category = "Tous"
+    end
+    if params[:plant_type].present? && params[:plant_type] != "Tous"
+      @plants = @plants.where(category: params[:plant_type])
+      @selected_category = params[:plant_type]
+    end
     @plant = Plant.new
 
     # tasks filter (calendar)
@@ -24,10 +22,10 @@ class PlantsController < ApplicationController
     else
       @tasks = @plants.map(&:tasks).flatten
     end
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render json: { plants: @plants } }
-    # end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create

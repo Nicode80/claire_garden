@@ -1,0 +1,5 @@
+var plantCards = document.querySelector('#plant-cards > .row');
+var taskCards = document.querySelector('#task-cards');
+
+plantCards.innerHTML = "<%= j render('plant_cards', plants: @plants) %>";
+taskCards.innerHTML = "<%= j render('task_cards', tasks: @tasks) %>";
