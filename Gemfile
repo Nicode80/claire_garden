@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # For Authotication
 gem 'devise'
+gem 'omniauth-facebook'
 
 # To save uploaded images in the cloud
 gem 'cloudinary', '~> 1.16.0'
