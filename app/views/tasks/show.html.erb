@@ -7,18 +7,24 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 <% else %>
   url(<%= image_path('task_placeholder.jpg') %>);
 <% end %>">
-  <div class="dropdown align-self-end">
-    <!-- avatar -->
-    <% if current_user.photo.attached? %>
-      <%= cl_image_tag current_user.photo.key, width: 56, height: 56, crop: :fill, class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-    <% else %>
-      <%= image_tag "avatar_placeholder.svg", alt: "avatar", class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-    <% end %>
-    <!-- dropdown-menu from avatar -->
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-      <%= link_to "Action", "#", class: "dropdown-item" %>
-      <%= link_to "Another action", "#", class: "dropdown-item" %>
-      <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+  <div class="d-flex justify-content-between">
+    <h4><%= link_to plant_path(@plant) do %>
+      <i class="fas fa-arrow-left"></i>
+      <% end %>
+    </h4>
+    <div class="dropdown">
+      <!-- avatar -->
+      <% if current_user.photo.attached? %>
+        <%= cl_image_tag current_user.photo.key, width: 56, height: 56, crop: :fill, class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+      <% else %>
+        <%= image_tag "avatar_placeholder.svg", alt: "avatar", class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+      <% end %>
+      <!-- dropdown-menu from avatar -->
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <%= link_to "Action", "#", class: "dropdown-item" %>
+        <%= link_to "Another action", "#", class: "dropdown-item" %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+      </div>
     </div>
   </div>
 </div>
@@ -38,7 +44,14 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
     <!-- saison and periodicity badges -->
     <div class="d-flex justify-content-end mb-2">
-      <span class="badge badge-pill badge-success m-2"><%= @season %></span>
+      <span class="badge badge-pill badge-success m-2">
+        <% if @task.months.empty? %>
+        <% elsif @task.months.length == 1 %>
+          <%= @task.start_date.strftime('%b') %>
+        <% else %>
+          <%= @task.start_date.strftime('%b') %> - <%= @task.end_date.strftime('%b') %>
+        <% end %>
+      </span>
       <span class="badge badge-pill badge-warning m-2"><%= @task.periodicity %></span>
     </div>
   </div>

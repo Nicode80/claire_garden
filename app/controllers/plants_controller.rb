@@ -1,8 +1,33 @@
 class PlantsController < ApplicationController
 
   def index
+    # # non ajax plants filter (dropdown and search)
+    # if params[:plant_query].present? && params[:plant_query] != ""
+    #   @plants = Plant.where(user_id: current_user.id).search_by_name(params[:plant_query])
+    #   @selected_category = "Tous"
+    # elsif params[:plant_type].present? && params[:plant_type] != "Tous"
+    #   @plants = Plant.where(user_id: current_user.id).where(category: params[:plant_type])
+    #   @selected_category = params[:plant_type]
+    # else
+    #   @plants = Plant.where(user_id: current_user.id)
+    #   @selected_category = "Tous"
+    # end
     @plants = Plant.where(user_id: current_user.id)
     @plant = Plant.new
+
+    # tasks filter (calendar)
+    months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+    @calendar_params = params.select { |_key, value| months.include? value }.keys.map(&:to_i)
+    if @calendar_params.present?
+      tasks = @plants.map(&:tasks).flatten
+      @tasks = tasks.select { |task| overlap?(@calendar_params, task.months) }
+    else
+      @tasks = @plants.map(&:tasks).flatten
+    end
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: { plants: @plants } }
+    # end
   end
 
   def create
@@ -15,9 +40,16 @@ class PlantsController < ApplicationController
   end
 
   def show
+    # raise
     @plant = Plant.find(params[:id])
     @task = Task.new
-    @tasks = @plant.tasks
+    if params[:season].present? && params[:season] != "Toutes"
+      tasks = @plant.tasks
+      @season = params[:season]
+      @tasks = tasks.select { |task| task.season == params[:season] }
+    else
+      @tasks = @plant.tasks
+    end
   end
 
   def update
@@ -37,5 +69,11 @@ class PlantsController < ApplicationController
       :notes,
       :category,
       :photo)
+  end
+
+  def overlap?(params, task_months)
+    overlap = false
+    params.each { |number| overlap = task_months.include? number }
+    overlap
   end
 end

@@ -15,6 +15,29 @@
       <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
     </div>
   </div>
+  <div class="container">
+      <div class="row search-card">
+        <!-- dropdown filter -->
+        <div class="col-6 px-2">
+          <%= form_tag plants_path, method: :get, class: "column-filter dropdown-filter text-center", id: "plant-tab-filter-form" do %>
+            <%= label_tag "Type de plante" %>
+            <%= select_tag "plant_type", options_for_select( Plant::CATEGORIES, @selected_category ) %>
+            <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', name: nil %>
+          <% end %>
+        </div>
+        <!-- search bar -->
+        <div class="col-6 px-2 text-center">
+          <%= form_tag plants_path, method: :get do %>
+            <%= label_tag "Recherche" %>
+            <%= text_field_tag :plant_query,
+              params[:plant_query],
+              class: "form-control",
+              placeholder: "hortensia    🔍"
+            %>
+          <% end %>
+        </div>
+      </div>
+    </div>
 </div>
 
 
@@ -32,45 +55,12 @@
   <!-- my-plants-Tab -->
 
   <div class="tab-pane active" id="tab-my-plants">
-    <div class="container">
-      <div class="row">
-        <!-- dropdown filter -->
-        <div class="col-6 px-2">
-          <%= form_tag plants_path, method: :get, class: "dropdown-filter", id: "filter-form" do %>
-            <%= label_tag "Type de plante" %>
-            <%= select_tag "Type de plante", options_for_select( Plant::CATEGORIES ), {:include_blank => true} %>
-            <%= submit_tag "Apply filters", class: 'btn btn-primary', id: "filter-form-button" %>
-          <% end %>
-        </div>
-        <!-- search bar -->
-        <div class="col-6 px-2">
-          <%= form_tag plants_path, method: :get do %>
-            <%= label_tag "Recherche" %>
-            <%= text_field_tag :query,
-              params[:query],
-              class: "form-control",
-              placeholder: "trouver une plante"
-            %>
-          <% end %>
-        </div>
-      </div>
-    </div>
+
+
     <!-- plant cards -->
-    <div class="container">
+    <div class="container" id="plant-cards">
       <div class="row">
-        <% @plants.each do |plant| %>
-          <%= link_to plant_path(plant),class: 'text-decoration-none col-6 px-2' do %>
-            <div class="card plant-card"
-              style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-              <% if plant.photo.attached? %>
-                url(<%= cl_image_path plant.photo.key, height: 500, crop: :fill %>);
-              <% else %>
-                url(<%= image_path('flower_placeholder.jpg') %>);
-              <% end %>">
-              <h4><%= plant.name %></h4>
-            </div>
-          <% end %>
-        <% end %>
+        <%= render 'plant_cards', plants: @plants %>
       </div>
     </div>
 
@@ -79,22 +69,37 @@
 
   </div>
 
-
-
-
   <!-- my-calendar-Tab -->
 
   <div class="tab-pane" id="tab-my-calendar">
-    <h3>Type de plante</h3>
-    <p>calendrier</p>
-    <h3>Actions</h3>
-    <p>Actions cards</p>
+    <div class="container">
+
+      <!-- calendar -->
+      <div class="row text-center">
+        <%= form_tag plants_path, method: :get, class: "month-filter_search", id: "month-filter-form" do %>
+          <% {Janvier: 1, Février: 2, Mars: 3, Avril: 4, Mai: 5, Juin: 6, Juillet: 7, Août: 8, Septembre: 9, Octobre: 10, Novembre: 11, Décembre: 12 }.each do |month, number| %>
+            <% if @calendar_params.include? number %>
+              <%= check_box_tag number, month, true %>
+              <%= label_tag number, month, style: '', class: "col-3 text-center p-0" %>
+            <% else %>
+              <%= check_box_tag number, month %>
+              <%= label_tag number, month, style: '', class: "col-3 text-center p-0" %>
+            <% end %>
+          <% end %>
+          <%= submit_tag "Apply filters", class: 'btn btn-primary', name: nil %>
+        <% end %>
+      </div>
+
+      <!-- Tasks -->
+      <h5 class="my-3">Actions</h5>
+      <!-- tasks cards -->
+      <div id="task-cards">
+        <%= render 'task_cards', tasks: @tasks %>
+      </div>
+    </div>
   </div>
-
-
-
-
 </div>
+
 
 <!-- new plant modal -->
 
