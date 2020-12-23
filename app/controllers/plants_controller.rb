@@ -1,8 +1,8 @@
 class PlantsController < ApplicationController
 
   def index
+    # plants filter (dropdown and search)
     @plants = Plant.where(user_id: current_user.id)
-    # non ajax plants filter (dropdown and search)
     if params[:plant_query].present? && params[:plant_query] != ""
       @plants = @plants.search_by_name(params[:plant_query])
       @selected_category = "Tous"
@@ -11,16 +11,16 @@ class PlantsController < ApplicationController
       @plants = @plants.where(category: params[:plant_type])
       @selected_category = params[:plant_type]
     end
+
+    # for new plant modal
     @plant = Plant.new
 
     # tasks filter (calendar)
     months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
     @calendar_params = params.select { |_key, value| months.include? value }.keys.map(&:to_i)
+    @tasks = @plants.map(&:tasks).flatten
     if @calendar_params.present?
-      tasks = @plants.map(&:tasks).flatten
-      @tasks = tasks.select { |task| overlap?(@calendar_params, task.months) }
-    else
-      @tasks = @plants.map(&:tasks).flatten
+      @tasks = @tasks.select { |task| overlap?(@calendar_params, task.months) }
     end
     respond_to do |format|
       format.html
