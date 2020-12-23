@@ -1,0 +1,7 @@
+var plantCards = document.querySelector('#plant-cards > .row');
+var taskCards = document.querySelector('#task-cards');
+var calendarFilter = document.querySelector('#calendar-filter');
+
+plantCards.innerHTML = "<%= j render('plant_cards', plants: @plants) %>";
+taskCards.innerHTML = "<%= j render('task_cards', tasks: @tasks) %>";
+calendarFilter.innerHTML = "<%= j render('calendar_filter', plant_query: :plant_query, plant_type: :plant_type) %>";
