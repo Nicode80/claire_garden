@@ -139,12 +139,12 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                         input_html: { class: "col-12 mb-3"} %>
             <%= f.input :photo,
                         as: :file,
-                        input_html: { class: "d-none", id: 'photo-input' },
+                        input_html: { class: "d-none" },
                         label_html: { class: 'upload-photo col-12 text-center'},
                         label: '📷 Choisissez une photo' %>
             <div class="row">
               <%= link_to 'Annuler', plant_path(@plant), class: "btn btn-outline-danger col-6" %>
-              <%= f.submit 'Valider', class: "btn btn-primary col-6", id: 'new-tache-submit' %>
+              <%= f.submit 'Valider', class: "btn btn-primary col-6" %>
             </div>
           <% end %>
         </div>
