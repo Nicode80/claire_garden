@@ -165,7 +165,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                         as: :select,
                         collection: Plant::CATEGORIES,
                         input_html: { class: "col-12" } %>
-
+            <%= f.input :first_name %>
+            <%= f.input :last_name %>
             <%= f.input :photo,
                         as: :file,
                         input_html: { class: "d-none" },

@@ -21,6 +21,8 @@ class PagesController < ApplicationController
   def home
     if user_signed_in?
       redirect_to plants_path
+    else
+      redirect_to new_session_path(resource_name)
     end
   end
 end
