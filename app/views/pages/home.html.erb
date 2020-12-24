@@ -11,12 +11,14 @@
       </div>
     <% else %>
       <div class="row mt-2">
-        <a href="#" class="col-8 offset-2 btn btn-primary d-block mt-3" data-toggle="modal" data-target="#signupModal">S'inscrire avec un email</a>
+        <%= link_to "S'inscrire avec un email", new_user_registration_path, class: 'btn btn-primary col-6 offset-3 d-block mt-5' %>
+        <!-- <a href="#" class="col-8 offset-2 btn btn-primary d-block mt-3" data-toggle="modal" data-target="#signupModal">S'inscrire avec un email</a> -->
       </div>
       <div class="row">
          <%= link_to "Se connecter avec Google", new_user_registration_path, class: "col-8 offset-2 btn btn-danger d-block mt-3" %>
       </div>
-      <p class="text-center mt-3">Vous avez déjà un compte ? <a href="#" data-toggle="modal" data-target="#signinModal">se connecter</a></p>
+      <p class="text-center mt-3">Vous avez déjà un compte ? <%= link_to "se connecter", new_user_session_path %></p>
+      <!-- <p class="text-center mt-3">Vous avez déjà un compte ? <a href="#" data-toggle="modal" data-target="#signinModal">se connecter</a></p> -->
    <% end %>
   </div>
 </div>
@@ -51,6 +53,8 @@
               <%= f.input :password_confirmation,
                           required: true,
                           input_html: { autocomplete: "new-password" } %>
+              <%= f.input :first_name %>
+              <%= f.input :last_name %>
               <%= f.input :photo,
                           as: :file,
                           input_html: { class: "d-none", id: 'photo-input' },
