@@ -17,9 +17,6 @@ class PlantsController < ApplicationController
 
     # tasks filter (calendar)
     @tasks = @plants.map(&:tasks).flatten
-    # raise
-    # months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
-    # @calendar_params = params.select { |_key, value| months.include? value }.keys.map(&:to_i)
     if params[:month].present?
       params_month_mumbers = params[:month].keys.map(&:to_i)
       @tasks = @tasks.select { |task| overlap?(params_month_mumbers, task.months) }
@@ -28,6 +25,7 @@ class PlantsController < ApplicationController
       params_month_mumbers = params[:filter_month].keys.map(&:to_i)
       @tasks = @tasks.select { |task| overlap?(params_month_mumbers, task.months) }
     end
+
     respond_to do |format|
       format.html
       format.js
@@ -47,12 +45,15 @@ class PlantsController < ApplicationController
     # raise
     @plant = Plant.find(params[:id])
     @task = Task.new
+    @tasks = @plant.tasks
     if params[:season].present? && params[:season] != "Toutes"
-      tasks = @plant.tasks
       @season = params[:season]
-      @tasks = tasks.select { |task| task.season == params[:season] }
-    else
-      @tasks = @plant.tasks
+      @tasks = @tasks.select { |task| task.season == params[:season] }
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

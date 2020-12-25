@@ -41,7 +41,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   <h5 class="my-3">Actions</h5>
   <!-- dropdown filter -->
   <div class="row px-2">
-    <%= form_tag plant_path(@plant), method: :get, class: "filter inline-filter w-100", id: "season-filter-form" do %>
+    <%= form_tag plant_path(@plant), method: :get, class: "filter inline-filter w-100", id: "season-filter-form", remote: true do %>
       <div class="col-4 text-right">
         <%= label_tag "Saison :" %>
       </div>
