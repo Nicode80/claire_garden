@@ -44,4 +44,16 @@ const ajaxFilter = () => {
   });
 }
 
-export { ajaxFilter }
+const ajaxSeasonFilter = () => {
+  const seasonFilterForm = document.querySelector('#season-filter-form');
+  if(!seasonFilterForm) return;
+
+  const season = seasonFilterForm.querySelector('#season');
+  season.addEventListener('change', event => {
+    event.preventDefault();
+
+    Rails.fire(seasonFilterForm, 'submit');
+  });
+}
+
+export { ajaxFilter, ajaxSeasonFilter }

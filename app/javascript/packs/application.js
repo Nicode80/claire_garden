@@ -28,9 +28,7 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { plantCreateSafe, taskCreateSafe } from '../components/create_safe';
-import { ajaxFilter } from '../components/ajax_filter';
-// import { plantDropdownAutoSubmit, seasonDropdownAutoSubmit } from '../components/dropdown_auto_submit';
-// import { ajaxPlantTypeDropdownFilter, ajaxSeasonDropdownFilter } from '../components/ajax_dropdown';
+import { ajaxFilter, ajaxSeasonFilter } from '../components/ajax_filter';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -38,6 +36,5 @@ document.addEventListener('turbolinks:load', () => {
   plantCreateSafe();
   taskCreateSafe();
   ajaxFilter();
-  // ajaxPlantTypeDropdownFilter();
-  // ajaxSeasonDropdownFilter();
+  ajaxSeasonFilter();
 });

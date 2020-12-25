@@ -1,0 +1,3 @@
+var taskCards = document.querySelector('#task-cards');
+
+taskCards.innerHTML = "<%= j render('task_cards', tasks: @tasks) %>";
