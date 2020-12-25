@@ -16,11 +16,17 @@ class PlantsController < ApplicationController
     @plant = Plant.new
 
     # tasks filter (calendar)
-    months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
-    @calendar_params = params.select { |_key, value| months.include? value }.keys.map(&:to_i)
     @tasks = @plants.map(&:tasks).flatten
-    if @calendar_params.present?
-      @tasks = @tasks.select { |task| overlap?(@calendar_params, task.months) }
+    # raise
+    # months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+    # @calendar_params = params.select { |_key, value| months.include? value }.keys.map(&:to_i)
+    if params[:month].present?
+      params_month_mumbers = params[:month].keys.map(&:to_i)
+      @tasks = @tasks.select { |task| overlap?(params_month_mumbers, task.months) }
+    end
+    if params[:filter_month].present?
+      params_month_mumbers = params[:filter_month].keys.map(&:to_i)
+      @tasks = @tasks.select { |task| overlap?(params_month_mumbers, task.months) }
     end
     respond_to do |format|
       format.html
@@ -69,9 +75,7 @@ class PlantsController < ApplicationController
       :photo)
   end
 
-  def overlap?(params, task_months)
-    overlap = false
-    params.each { |number| overlap = task_months.include? number }
-    overlap
+  def overlap?(params_month_mumbers, task_month_numbers)
+    overlap = (params_month_mumbers & task_month_numbers).any?
   end
 end
