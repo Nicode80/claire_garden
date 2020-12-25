@@ -4,7 +4,7 @@
   <div class="dropdown align-self-end">
     <!-- avatar -->
     <% if current_user.photo.attached? %>
-      <%= cl_image_tag current_user.photo.key, width: 56, height: 56, crop: :fill, class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+      <%= cl_image_tag current_user.photo.key, class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
     <% else %>
       <%= image_tag "avatar_placeholder.svg", alt: "avatar", class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
     <% end %>
@@ -29,6 +29,11 @@
               params[:plant_query],
               class: "form-control",
               placeholder: "hortensia    🔍"%>
+            <% {Janvier: 1, Février: 2, Mars: 3, Avril: 4, Mai: 5, Juin: 6, Juillet: 7, Août: 8,
+              Septembre: 9, Octobre: 10, Novembre: 11, Décembre: 12 }.each do |month, number| %>
+              <%= check_box_tag "filter_month[#{number}]", month, false, class: "d-none" %>
+              <%= label_tag "filter_month[#{number}]", month, class: "d-none" %>
+            <% end %>
           </div>
             <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', name: nil %>
           <% end %>
@@ -75,7 +80,16 @@
 
       <!-- calendar -->
       <div class="row text-center" id="calendar-filter">
-        <%= render 'calendar_filter', plant_query: :plant_query, plant_type: :plant_type %>
+        <%= form_tag plants_path, method: :get, class: "month-filter", id: "month-filter-form", remote: true do %>
+          <% {Janvier: 1, Février: 2, Mars: 3, Avril: 4, Mai: 5, Juin: 6, Juillet: 7, Août: 8,
+              Septembre: 9, Octobre: 10, Novembre: 11, Décembre: 12 }.each do |month, number| %>
+            <%= check_box_tag "month[#{number}]", month %>
+            <%= label_tag "month[#{number}]", month, class: "col-3 text-center p-0" %>
+          <% end %>
+            <%= text_field_tag :plant_type, (params[:plant_type] or "Tous"), id: "hidden-plant-type", class: "d-none" %>
+            <%= text_field_tag :plant_query, params[:plant_query], id: "hidden-plant-query", class: "d-none" %>
+          <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', name: nil %>
+        <% end %>
       </div>
 
       <!-- Tasks -->
@@ -120,10 +134,10 @@
                         input_html: { class: "col-12" } %>
 
             <%= f.input :photo,
-                          as: :file,
-                          input_html: { class: "d-none", id: 'photo-input' },
-                          label_html: { class: 'upload-photo col-12 text-center'},
-                          label: '📷 Choisissez une photo' %>
+                        as: :file,
+                        input_html: { class: "d-none", id: 'photo-input' },
+                        label_html: { class: 'upload-photo col-12 text-center'},
+                        label: '📷 Choisissez une photo' %>
             <%#= image_tag "", width: 300, class: "hidden mx-auto mb-2", id: "photo-preview" %>
             <div class="row">
               <%= link_to 'Annuler', plants_path, class: "btn btn-outline-danger col-6" %>

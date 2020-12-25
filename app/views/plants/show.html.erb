@@ -3,7 +3,7 @@
 <div class="banner"
 style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 <% if @plant.photo.attached? %>
-  url(<%= cl_image_path @plant.photo.key, height: 500, crop: :fill %>);
+  url(<%= cl_image_path @plant.photo.key %>);
 <% else %>
   url(<%= image_path('flower_placeholder.jpg') %>);
 <% end %>">
@@ -15,7 +15,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     <div class="dropdown">
       <!-- avatar -->
       <% if current_user.photo.attached? %>
-        <%= cl_image_tag current_user.photo.key, width: 56, height: 56, crop: :fill, class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+        <%= cl_image_tag current_user.photo.key class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
       <% else %>
         <%= image_tag "avatar_placeholder.svg", alt: "avatar", class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
       <% end %>
@@ -159,13 +159,11 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                         label: false,
                         placeholder: "Notes",
                         input_html: { class: "col-12 mb-3" } %>
-
             <%= f.input :category,
                         placeholder: "Type de plante",
                         as: :select,
                         collection: Plant::CATEGORIES,
                         input_html: { class: "col-12" } %>
-
             <%= f.input :photo,
                         as: :file,
                         input_html: { class: "d-none" },
