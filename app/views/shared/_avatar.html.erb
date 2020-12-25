@@ -1,0 +1,6 @@
+<% if current_user.photo.attached? %>
+  <%= cl_image_tag current_user.photo.key, class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+<% else %>
+  <% avatar_url = current_user.facebook_picture_url || "avatar_placeholder.svg" %>
+  <%= image_tag avatar_url, alt: "avatar", class: "avatar-large align-self-start dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+<% end %>

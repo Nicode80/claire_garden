@@ -1,4 +1,4 @@
-.claire-garden-button {
+.button {
   font-size: 20px;
   border-radius: 0px;
   width: 100%;
@@ -6,19 +6,19 @@
   border: none;
   text-transform: uppercase;
   font-weight: 200;
+  color: $light-gray;
   letter-spacing: .05em;
+}
+
+.claire-garden-button {
   background: linear-gradient(270deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 99.17%), $claire-main;
 }
 
+.fb-sign-in-button {
+  background: #1877F2;
+}
+
 .delete-button {
-  font-size: 20px;
-  border-radius: 0px;
-  width: 100%;
-  height: 8vh;
-  border: none;
-  text-transform: uppercase;
-  font-weight: 200;
-  letter-spacing: .05em;
   color: $red;
 }
 
