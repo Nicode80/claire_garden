@@ -3,7 +3,7 @@
     <div class="card plant-card"
       style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       <% if plant.photo.attached? %>
-        url(<%= cl_image_path plant.photo.key, height: 500, crop: :fill %>);
+        url(<%= cl_image_path plant.photo.key %>);
       <% else %>
         url(<%= image_path('flower_placeholder.jpg') %>);
       <% end %>">
