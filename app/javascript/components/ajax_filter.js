@@ -1,6 +1,6 @@
 import Rails from '@rails/ujs'
 
-const ajaxFilter = () => {
+const ajaxBannerFilter = () => {
   const filterForm = document.querySelector('#filter-form');
   if(!filterForm) return;
 
@@ -27,21 +27,26 @@ const ajaxFilter = () => {
     //submit a form ajax way thanks to Rails.fire
     Rails.fire(filterForm, 'submit');
   });
+}
 
-  // Ajax month filter
+const ajaxCalendarFilter = () => {
   const monthFilterForm = document.querySelector('#month-filter-form');
+  if(!monthFilterForm) return;
+
   const calendarMonthInputs = monthFilterForm.querySelectorAll('input[type=checkbox]');
 
   calendarMonthInputs.forEach(calendarMonthInput => {
     calendarMonthInput.addEventListener('change', event =>{
       event.preventDefault();
       //select hidden month in header filter form
-      const filterMonthInput = filterForm.querySelector(`input[value=${event.currentTarget.value}]`);
+      const headerFilterForm = document.querySelector('#filter-form');
+      const filterMonthInput = headerFilterForm.querySelector(`input[value=${event.currentTarget.value}]`);
       filterMonthInput.click();
 
       Rails.fire(monthFilterForm, 'submit');
     });
   });
+
 }
 
 const ajaxSeasonFilter = () => {
@@ -56,4 +61,4 @@ const ajaxSeasonFilter = () => {
   });
 }
 
-export { ajaxFilter, ajaxSeasonFilter }
+export { ajaxBannerFilter, ajaxCalendarFilter, ajaxSeasonFilter }

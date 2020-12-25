@@ -28,13 +28,14 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { plantCreateSafe, taskCreateSafe } from '../components/create_safe';
-import { ajaxFilter, ajaxSeasonFilter } from '../components/ajax_filter';
+import { ajaxBannerFilter, ajaxCalendarFilter, ajaxSeasonFilter } from '../components/ajax_filter';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   plantCreateSafe();
   taskCreateSafe();
-  ajaxFilter();
+  ajaxBannerFilter();
+  ajaxCalendarFilter();
   ajaxSeasonFilter();
 });
