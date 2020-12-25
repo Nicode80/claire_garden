@@ -84,9 +84,9 @@
             <%= check_box_tag "month[#{number}]", month %>
             <%= label_tag "month[#{number}]", month, class: "col-3 text-center p-0" %>
           <% end %>
-            <%= text_field_tag :plant_type, (params[:plant_type] or "Tous"), id: "hidden-plant-type" %>
-            <%= text_field_tag :plant_query, params[:plant_query], id: "hidden-plant-query" %>
-          <%= submit_tag "Apply filters", class: 'btn btn-primary', name: nil %>
+            <%= text_field_tag :plant_type, (params[:plant_type] or "Tous"), id: "hidden-plant-type", class: "d-none" %>
+            <%= text_field_tag :plant_query, params[:plant_query], id: "hidden-plant-query", class: "d-none" %>
+          <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', name: nil %>
         <% end %>
       </div>
 
