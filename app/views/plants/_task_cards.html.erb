@@ -3,7 +3,7 @@
     class: 'text-decoration-none' do %>
     <div class="card task-card">
       <% if task.photo.attached? %>
-        <%= cl_image_tag task.photo.key, height: 100, crop: :fill %>
+        <%= cl_image_tag task.photo.key %>
       <% else %>
         <%= image_tag('task_placeholder.jpg') %>
       <% end %>
