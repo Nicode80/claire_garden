@@ -1,10 +1,16 @@
 <div style="height: 100vh;">
-  <div class="container-fluid d-flex flex-column-reverse" style="background-image: url(<%= image_path('home-image.svg') %>); height: 61vh; background-size: 100vw; background-repeat: no-repeat;">
+  <div class="container-fluid d-flex flex-column-reverse" style="background-image: url(<%= image_path('home-image.svg') %>); height: 406px; background-size: 100vw; background-repeat: no-repeat;">
     <h2 class="text-info text-center pb-5">Claire's Garden</h2>
   </div>
 
-  <div class="container mt-3">
-    <%= link_to "Connexion avec Facebook", user_facebook_omniauth_authorize_path %>
+  <div class="container mt-2">
+    <%= link_to user_facebook_omniauth_authorize_path,
+     class: "d-flex justify-content-center align-items-center btn button fb-sign-in-button" do %>
+     <p class="m-0">connexion avec Facebook</p>
+    <% end %>
+    <div id="or" class="my-2">
+      <span class="px-2">OU</span>
+    </div>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-inputs">
         <%= f.input :email,
