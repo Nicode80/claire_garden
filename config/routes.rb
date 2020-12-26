@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   end
 
   resources :tasks, only: [:show, :update, :destroy ]
+
+  resources :users, only: [:edit, :update]
 end
