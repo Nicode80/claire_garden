@@ -42,6 +42,9 @@ gem 'simple_form'
 #search
 gem 'pg_search', '~> 2.3.0'
 
+#To render Action Text attached images
+gem 'image_processing', '~> 1.2'
+
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
