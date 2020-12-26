@@ -1,0 +1,36 @@
+<!-- header -->
+<div class="container">
+  <h2 class="text-center mt-3">Modifier mon profil</h2>
+  <p>Votre email pour accéder à Claire's garden: <%= current_user.email %></p>
+
+  <!-- update form -->
+  <%= simple_form_for @user, html: { method: :patch } do |f| %>
+  <div class="d-flex justify-content-between">
+    <%= f.input :first_name,
+                label: "Prémon",
+                wrapper_html: { class: "mr-2" },
+                input_html: { class: "" } %>
+    <%= f.input :last_name,
+                label: "Nom",
+                input_html: { class: "" } %>
+  </div>
+  <%= f.input :photo,
+              as: :file,
+              input_html: { class: "d-none", id: 'photo-input' },
+              label_html: { class: 'upload-photo col-12 text-center'},
+              hint: "Ne rien mettre si vous ne souhaitez pas changer",
+              label: '📷 Choisissez une autre photo de profil' %>
+
+  <div class="container-fluid button-sticky-bottom p-0">
+    <div class="row">
+      <div class="col-6 p-0">
+        <%= link_to "Annuler", plants_path, class: 'btn button delete-button' %>
+      </div>
+      <div class="col-6 p-0">
+        <%= f.button :submit, "Mettre à jour", class: "button claire-garden-button" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+</div>
