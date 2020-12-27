@@ -121,13 +121,13 @@
                         as: :select,
                         collection: Plant::CATEGORIES,
                         input_html: { class: "col-12" } %>
-
             <%= f.input :photo,
                         as: :file,
-                        input_html: { class: "d-none", id: 'photo-input' },
+                        input_html: { class: "d-none", id: 'new-plant-photo-input' },
                         label_html: { class: 'upload-photo col-12 text-center'},
+                        wrapper_html: { class: 'm-0' },
                         label: '📷 Choisissez une photo' %>
-            <%#= image_tag "", width: 300, class: "hidden mx-auto mb-2", id: "photo-preview" %>
+            <%= image_tag "", width: 300, class: "hidden mx-auto mb-2 w-100", id: "new-plant-photo-preview" %>
             <div class="row">
               <%= link_to 'Annuler', plants_path, class: "btn btn-outline-danger col-6" %>
               <%= f.submit 'Valider', class: "btn btn-primary col-6 disabled", id: 'new-plant-submit' %>
