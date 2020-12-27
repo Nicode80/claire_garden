@@ -134,7 +134,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                         input_html: { class: "d-none", id: 'edit-task-photo-input' },
                         label_html: { class: 'upload-photo col-12 text-center mt-2'},
                         label: '📷 Choisissez une photo' %>
-            <%= image_tag "", width: 300, class: "hidden mx-auto mb-2", id: "edit-task-photo-preview" %>
+            <%= image_tag "", width: 300, class: "hidden mx-auto mb-2 w-100", id: "edit-task-photo-preview" %>
 
             <div class="row">
               <%= link_to 'Annuler', plant_path(@plant), class: "btn btn-outline-danger col-6" %>
