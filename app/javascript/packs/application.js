@@ -31,6 +31,7 @@ import "bootstrap";
 // import { initSelect2 } from '../components/init_select2';
 import { plantCreateSafe, taskCreateSafe } from '../components/create_safe';
 import { ajaxBannerFilter, ajaxCalendarFilter, ajaxSeasonFilter } from '../components/ajax_filter';
+import { previewImageOnFileSelect } from '../components/photo_preview';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -40,6 +41,12 @@ document.addEventListener('turbolinks:load', () => {
   ajaxBannerFilter();
   ajaxCalendarFilter();
   ajaxSeasonFilter();
+  previewImageOnFileSelect('new-user-photo-input', 'new-user-photo-preview');
+  previewImageOnFileSelect('new-plant-photo-input', 'new-plant-photo-preview');
+  previewImageOnFileSelect('new-task-photo-input', 'new-task-photo-preview');
+  previewImageOnFileSelect('edit-user-photo-input', 'edit-user-photo-preview');
+  previewImageOnFileSelect('edit-plant-photo-input', 'edit-plant-photo-preview');
+  previewImageOnFileSelect('edit-task-photo-input', 'edit-task-photo-preview');
 });
 
 require("trix")
