@@ -37,13 +37,12 @@ class TasksController < ApplicationController
       :end_date,
       :periodicity,
       :content,
-      :photo)
+      :photo
+      )
   end
 
   def set_task
     @task = Task.find(params[:id])
   end
 end
-
-
 

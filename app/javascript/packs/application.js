@@ -48,6 +48,3 @@ document.addEventListener('turbolinks:load', () => {
   previewImageOnFileSelect('edit-plant-photo-input', 'edit-plant-photo-preview');
   previewImageOnFileSelect('edit-task-photo-input', 'edit-task-photo-preview');
 });
-
-require("trix")
-require("@rails/actiontext")
