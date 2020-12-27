@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_26_175921) do
+ActiveRecord::Schema.define(version: 2020_12_27_111747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 2020_12_26_175921) do
     t.date "start_date"
     t.date "end_date"
     t.string "periodicity"
-    t.text "content"
     t.bigint "plant_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
