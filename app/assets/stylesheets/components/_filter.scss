@@ -7,7 +7,6 @@
   display: flex;
   label {
     margin: 0;
-    vertical-align: sub;
   }
 }
 
@@ -30,8 +29,5 @@
   input[type="checkbox"]:checked + label {
     background-color: $claire-main;
     color: $claire-card-background;
-  }
-  input[type="checkbox"] + label {
-    // border: 1px solid grey;
   }
 }

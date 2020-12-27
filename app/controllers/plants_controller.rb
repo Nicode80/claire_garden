@@ -42,7 +42,6 @@ class PlantsController < ApplicationController
   end
 
   def show
-    # raise
     @plant = Plant.find(params[:id])
     @task = Task.new
     @tasks = @plant.tasks
@@ -73,10 +72,11 @@ class PlantsController < ApplicationController
       :name,
       :notes,
       :category,
-      :photo)
+      :photo
+      )
   end
 
   def overlap?(params_month_mumbers, task_month_numbers)
-    overlap = (params_month_mumbers & task_month_numbers).any?
+    (params_month_mumbers & task_month_numbers).any?
   end
 end
