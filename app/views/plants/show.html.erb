@@ -88,7 +88,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                             label: "débute",
                             input_html: { class: "col-12 mb-3"},
                             label_html: { class: "align-self-center"},
-                            wrapper_html: { class: 'd-flex flex-column' }
+                            wrapper_html: { class: 'd-flex flex-column m-0' }
                 %>
               </div>
               <div class="col-6">
@@ -98,7 +98,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                             label: "termine",
                             input_html: { class: "col-12 mb-3"},
                             label_html: { class: "align-self-center"},
-                            wrapper_html: { class: 'd-flex flex-column' }
+                            wrapper_html: { class: 'd-flex flex-column m-0' }
                 %>
               </div>
             </div>
@@ -108,14 +108,14 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                         as: :select,
                         collection: Task::PERIODICITES,
                         input_html: { class: "col-12 mb-3"} %>
-            <%= f.input :content,
+            <%= f.rich_text_area :content,
                         label: false,
                         placeholder: "Couper les branches en laissant 2 noeuds",
                         input_html: { class: "col-12 mb-3"} %>
             <%= f.input :photo,
                         as: :file,
                         input_html: { class: "d-none" },
-                        label_html: { class: 'upload-photo col-12 text-center'},
+                        label_html: { class: 'upload-photo col-12 text-center mt-2'},
                         label: '📷 Choisissez une photo' %>
             <div class="row">
               <%= link_to 'Annuler', plant_path(@plant), class: "btn btn-outline-danger col-6" %>
@@ -146,7 +146,6 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
                         label: false,
                         placeholder: "Nom*",
                         input_html: { class: "col-12 mb-3" } %>
-
             <%= f.input :notes,
                         label: false,
                         placeholder: "Notes",

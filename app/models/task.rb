@@ -4,6 +4,7 @@ class Task < ApplicationRecord
   PERIODICITES = ['Mensuel', 'Trimestriel', 'Semestriel', 'Annuel', 'Bisannuel', 'Trisannuel']
 
   has_one_attached :photo
+  has_rich_text :content
 
   def season
     start_month = self.start_date.month
