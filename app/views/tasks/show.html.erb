@@ -144,7 +144,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
             <%= image_tag "", width: 300, class: "hidden mx-auto mb-2 w-100", id: "edit-task-photo-preview" %>
 
             <div class="row">
-              <%= link_to 'Annuler', plant_path(@plant), class: "btn btn-outline-danger col-6" %>
+              <%= link_to 'Annuler', task_path(@task), class: "btn btn-outline-danger col-6" %>
               <%= f.submit 'Valider', class: "btn btn-primary col-6" %>
             </div>
           <% end %>
