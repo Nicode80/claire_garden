@@ -32,6 +32,7 @@ import "bootstrap";
 import { plantCreateSafe, taskCreateSafe } from '../components/create_safe';
 import { ajaxBannerFilter, ajaxCalendarFilter, ajaxSeasonFilter } from '../components/ajax_filter';
 import { previewImageOnFileSelect } from '../components/photo_preview';
+import { autoFadeAlert } from '../components/auto_fade_alert';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -47,4 +48,5 @@ document.addEventListener('turbolinks:load', () => {
   previewImageOnFileSelect('edit-user-photo-input', 'edit-user-photo-preview');
   previewImageOnFileSelect('edit-plant-photo-input', 'edit-plant-photo-preview');
   previewImageOnFileSelect('edit-task-photo-input', 'edit-task-photo-preview');
+  autoFadeAlert();
 });
