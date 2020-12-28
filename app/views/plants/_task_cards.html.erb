@@ -1,5 +1,5 @@
 <% tasks.each do |task| %>
-  <%= link_to task_path(task),
+  <%= link_to task_path(task, path: path),
     class: 'text-decoration-none' do %>
     <div class="card task-card">
       <% if task.photo.attached? %>

@@ -36,9 +36,14 @@
 
 <!-- Tabs -->
 
-<nav class="nav claire-garden-tabs d-flex justify-content-around flex-nowrap">
-  <a class="active py-2" href="#tab-my-plants" data-toggle="tab">Mes plantes</a>
-  <a class="py-2" href="#tab-my-calendar" data-toggle="tab">Mon calendrier</a>
+<nav class="nav claire-garden-tabs d-flex justify-content-around flex-nowrap" id="plant-index-tab-bar">
+  <% if params[:tab] == "plants-tab" || params[:tab].nil?  %>
+    <a class="active py-2" href="#tab-my-plants" data-toggle="tab" id="plant-tab-link">Mes plantes</a>
+    <a class="py-2" href="#tab-my-calendar" data-toggle="tab" id="calendar-tab-link">Mon calendrier</a>
+  <% else %>
+    <a class="py-2" href="#tab-my-plants" data-toggle="tab" id="plant-tab-link">Mes plantes</a>
+    <a class="active py-2" href="#tab-my-calendar" data-toggle="tab" id="calendar-tab-link">Mon calendrier</a>
+  <% end %>
 </nav>
 
 <!-- Tabs-content -->
@@ -46,49 +51,55 @@
 <div class="tab-content mt-2">
 
   <!-- my-plants-Tab -->
+  <% if params[:tab] == "plants-tab" || params[:tab].nil? %>
+    <div class="tab-pane active" id="tab-my-plants">
+  <% else %>
+    <div class="tab-pane" id="tab-my-plants">
+  <% end %>
 
-  <div class="tab-pane active" id="tab-my-plants">
-
-
-    <!-- plant cards -->
-    <div class="container" id="plant-cards">
-      <div class="row">
-        <%= render 'plant_cards', plants: @plants %>
+      <!-- plant cards -->
+      <div class="container" id="plant-cards">
+        <div class="row">
+          <%= render 'plant_cards', plants: @plants %>
+        </div>
       </div>
+
+      <!-- Add a new plant button -->
+      <button class="btn btn-primary button claire-garden-button button-sticky-bottom" data-toggle="modal" data-target="#newPlantModal">AJOUTER UNE PLANTE</button>
+
     </div>
-
-    <!-- Add a new plant button -->
-    <button class="btn btn-primary button claire-garden-button button-sticky-bottom" data-toggle="modal" data-target="#newPlantModal">AJOUTER UNE PLANTE</button>
-
-  </div>
 
   <!-- my-calendar-Tab -->
 
-  <div class="tab-pane" id="tab-my-calendar">
-    <div class="container">
+  <% if params[:tab] == "calendar-tab" %>
+    <div class="tab-pane active" id="tab-my-calendar">
+  <% else %>
+    <div class="tab-pane" id="tab-my-calendar">
+  <% end %>
+      <div class="container">
 
-      <!-- calendar -->
-      <div class="row text-center" id="calendar-filter">
-        <%= form_tag plants_path, method: :get, class: "month-filter", id: "month-filter-form", remote: true do %>
-          <% {Janvier: 1, Février: 2, Mars: 3, Avril: 4, Mai: 5, Juin: 6, Juillet: 7, Août: 8,
-              Septembre: 9, Octobre: 10, Novembre: 11, Décembre: 12 }.each do |month, number| %>
-            <%= check_box_tag "month[#{number}]", month %>
-            <%= label_tag "month[#{number}]", month, class: "col-3 text-center p-0" %>
+        <!-- calendar -->
+        <div class="row text-center" id="calendar-filter">
+          <%= form_tag plants_path, method: :get, class: "month-filter", id: "month-filter-form", remote: true do %>
+            <% {Janvier: 1, Février: 2, Mars: 3, Avril: 4, Mai: 5, Juin: 6, Juillet: 7, Août: 8,
+                Septembre: 9, Octobre: 10, Novembre: 11, Décembre: 12 }.each do |month, number| %>
+              <%= check_box_tag "month[#{number}]", month %>
+              <%= label_tag "month[#{number}]", month, class: "col-3 text-center p-0" %>
+            <% end %>
+              <%= text_field_tag :plant_type, (params[:plant_type] or "Tous"), id: "hidden-plant-type", class: "d-none" %>
+              <%= text_field_tag :plant_query, params[:plant_query], id: "hidden-plant-query", class: "d-none" %>
+            <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', name: nil %>
           <% end %>
-            <%= text_field_tag :plant_type, (params[:plant_type] or "Tous"), id: "hidden-plant-type", class: "d-none" %>
-            <%= text_field_tag :plant_query, params[:plant_query], id: "hidden-plant-query", class: "d-none" %>
-          <%= submit_tag "Apply filters", class: 'btn btn-primary d-none', name: nil %>
-        <% end %>
-      </div>
+        </div>
 
-      <!-- Tasks -->
-      <h5 class="my-3">Actions</h5>
-      <!-- tasks cards -->
-      <div id="task-cards">
-        <%= render 'task_cards', tasks: @tasks %>
+        <!-- Tasks -->
+        <h5 class="my-3">Actions</h5>
+        <!-- tasks cards -->
+        <div id="task-cards">
+          <%= render 'task_cards', tasks: @tasks, path: "plants" %>
+        </div>
       </div>
     </div>
-  </div>
 </div>
 
 

@@ -13,6 +13,7 @@ class TasksController < ApplicationController
   def show
     @plant = @task.plant
     @season = @task.season
+    @path = params[:path]
   end
 
   def update

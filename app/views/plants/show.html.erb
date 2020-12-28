@@ -8,7 +8,7 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   url(<%= image_path('flower_placeholder.jpg') %>);
 <% end %>">
   <div class="d-flex justify-content-between">
-    <h4><%= link_to plants_path do %>
+    <h4><%= link_to plants_path(tab: "plants-tab") do %>
       <i class="fas fa-arrow-left"></i>
       <% end %>
     </h4>
@@ -54,8 +54,8 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
 
   <!-- Task cards -->
   <div id="task-cards">
-        <%= render 'task_cards', tasks: @tasks %>
-      </div>
+    <%= render 'task_cards', tasks: @tasks, path: "plant" %>
+  </div>
 
 </div>
 
