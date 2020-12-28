@@ -5,13 +5,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= favicon_link_tag asset_path('claires_garden_favicon.png') %>
 
     <%# For PWA %>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="<%= asset_path 'manifest.json' %>"
-    <%= render 'shared/ios_pwa_links' %>
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+    <!-- <meta name="mobile-web-app-capable" content="yes"> -->
+    <!-- <link rel="manifest" href="app/assets/config/manifest.json"> -->
+    <%#= render 'shared/ios_pwa_links' %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -19,6 +18,7 @@
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
 
+    <%= favicon_link_tag asset_path('claires_garden_favicon.png') %>
 
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
   </head>
