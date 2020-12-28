@@ -8,8 +8,15 @@ style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
   url(<%= image_path('task_placeholder.jpg') %>);
 <% end %>">
   <div class="d-flex justify-content-between">
-    <h4><%= link_to plant_path(@plant) do %>
-      <i class="fas fa-arrow-left"></i>
+    <h4>
+      <% if @path == "plant" %>
+        <%= link_to plant_path(@plant) do %>
+        <i class="fas fa-arrow-left"></i>
+        <% end %>
+      <% else %>
+        <%= link_to plants_path(tab: "calendar-tab") do %>
+        <i class="fas fa-arrow-left"></i>
+        <% end %>
       <% end %>
     </h4>
     <div class="dropdown align-self-end">
